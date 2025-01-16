@@ -1,3 +1,52 @@
-h1.projectName {
+header {
+  padding: 50px 10px;
+  color: white;
+  width: 100%;
   text-align: center;
+  font-family: "Varela Round";
+  font-size: 70px;
+  font-weight: 1000;
+  position: fixed;
+  top: 0;
+  transition: 0.6s;
+}
+
+body {
+  height: 1270px;
+  background: linear-gradient(rgb(13, 20, 42) 12%, rgb(171, 201, 38) 80%);
+}
+
+.mainContent {
+  max-width: 600px;
+  margin: 0 auto;
+  border: solid 10px green;
+  padding: 10px;
+  margin-top: 400px;
+}
+
+.mainContent * {
+  padding: 10px;
+  background: #aaa;
+  border: dashed;
+}
+
+.mainContent * + * {
+  margin-top: 20px;
+  height: 50px;
+  background-color: #aaa;
+}
+
+.mainh1 {
+  height: 50px;
+  background: #aaa;
+}
+
+.mainContent {
+  min-height: 1000px;
+}
+.mainFooter {
+  position: -webkit-sticky;
+  position: sticky;
+  bottom: 0;
+  border-color: red;
 }
