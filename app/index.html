@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vite App</title>
+  </head>
+  <body>
+    <main>
+      <header>
+        <h1>Sparrow Fart</h1>
+        <p>Your daily sunrise and sunset times</p>
+      </header>
+      <div id="location-input">
+        <input type="text" id="location" placeholder="Enter your location..." />
+        <div id="suggestions"></div>
+      </div>
+
+      <div id="sun-times">
+        <div class="time">
+          <h2>Sunrise</h2>
+          <p id="sunrise-time">--:--</p>
+        </div>
+        <div class="time">
+          <h2>Sunset</h2>
+          <p id="sunset-time">--:--</p>
+        </div>
+      </div>
+
+      <div id="extra-info">
+        <h2>Additional Information</h2>
+        <p id="Shortest-day">Shortest Day: Calculating...</p>
+        <p id="Longest-day">Longest Day: Calculation...</p>
+      </div>
+      <img id="Location-image" alt="Location" src="" style="display: none" />
+
+      <div id="chart">
+        <h2>Sunrise and Sunset Times This Week</h2>
+        <canvas id="sun-chart"></canvas>
+      </div>
+
+      <footer>
+        <p>Powered by fellows at Marcy for early birds and night owls</p>
+      </footer>
+    </main>
+    <div id="app"></div>
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>
