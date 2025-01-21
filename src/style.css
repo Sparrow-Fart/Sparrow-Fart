@@ -8,42 +8,73 @@ header {
   font-weight: 1000;
   position: fixed;
   top: 0;
-  transition: 0.6s;
+  transition: 0.4s;
 }
 
+.example {
+  -ms-overflow-style: none;
+}
+
+.example::-webkit-scrollbar {
+  display: none;
+}
+
+html,
 body {
-  height: 1270px;
-  background: linear-gradient(rgb(13, 20, 42) 12%, rgb(171, 201, 38) 80%);
+  margin: 0;
+  height: 100%;
+  width: 100%;
+  background: linear-gradient(rgb(147, 188, 208) 12%, rgb(170, 186, 190) 80%);
 }
 
-.mainContent {
+#main-content {
+  display: none;
   max-width: 600px;
   margin: 0 auto;
   border: solid 10px green;
   padding: 10px;
-  margin-top: 400px;
+  margin-top: 200px;
 }
 
-.mainContent * {
+#location-input {
+  margin: auto;
+  width: 50%;
+  height: 30px;
+  font-size: 20px;
+  border-radius: 5px;
+  border-style: solid;
+}
+
+.topButton {
+  border: none;
+  border-radius: 7px;
+  background: none;
+  color: rgb(255, 255, 255);
+  font-family: "Varela Round";
+  font-weight: 600;
+  font-size: 30px;
+}
+
+#sun-times {
+  display: flex;
+  justify-content: space-around;
+  width: 80%;
+}
+
+.section {
+  border: hidden;
+  border-radius: 14px;
   padding: 10px;
-  background: #aaa;
-  border: dashed;
+  background: #154d695d;
+  margin: 5px;
 }
 
-.mainContent * + * {
-  margin-top: 20px;
-  height: 50px;
-  background-color: #aaa;
+#calendar {
+  padding: 10px;
+  margin: 5px;
+  background: #154d695d;
 }
 
-.mainh1 {
-  height: 50px;
-  background: #aaa;
-}
-
-.mainContent {
-  min-height: 1000px;
-}
 .mainFooter {
   position: -webkit-sticky;
   position: sticky;
