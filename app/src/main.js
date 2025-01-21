@@ -1,4 +1,33 @@
-import "./stylee.css";
+import "./style.css";
+const popularLocations = {
+  A: ["Atlanta", "Austin", "Anchorage", "Albany", "Albuquerque"],
+  B: ["Brooklyn", "Boston", "Boulder", "Baltimore", "Baton Rouge"],
+  C: ["Chicago", "Cleveland", "Columbus", "Charlotte", "Cincinnati"],
+  D: ["Dallas", "Denver", "Detroit", "Durham", "Des Moines"],
+  E: ["El Paso", "Eugene", "Evansville", "Elizabeth"],
+  F: ["Fresno", "Fort Worth", "Fort Lauderdale", "Fairbanks"],
+  G: ["Grand Rapids", "Greensboro", "Glendale", "Gainesville"],
+  H: ["Houston", "Honolulu", "Huntsville", "Hartford"],
+  I: ["Indianapolis", "Irvine", "Idaho Falls", "Inglewood"],
+  J: ["Jacksonville", "Jersey City", "Juneau", "Jackson"],
+  K: ["Kansas City", "Knoxville", "Kalamazoo", "Ketchikan"],
+  L: ["Los Angeles", "Louisville", "Las Vegas", "Little Rock"],
+  M: ["Miami", "Milwaukee", "Memphis", "Minneapolis"],
+  N: ["New York", "Nashville", "New Orleans", "Norfolk"],
+  O: ["Orlando", "Omaha", "Oakland", "Oklahoma City"],
+  P: ["Philadelphia", "Phoenix", "Pittsburgh", "Portland"],
+  Q: ["Quincy"],
+  R: ["Raleigh", "Richmond", "Reno", "Rochester"],
+  S: ["San Francisco", "San Diego", "Seattle", "Sacramento"],
+  T: ["Tampa", "Tucson", "Tulsa", "Toledo"],
+  U: ["Utica", "Upland"],
+  V: ["Virginia Beach", "Vancouver", "Visalia"],
+  W: ["Washington D.C.", "Wichita", "Wilmington", "Waco"],
+  X: ["Xenia"],
+  Y: ["Yonkers", "Yuma"],
+  Z: ["Zion"],
+};
+
 async function fetchSunTimes(lat, lng) {
   const response = await fetch(
     `https://api.sunrise-sunset.org/json?lat=${lat}&lng=${lng}&formatted=0`
@@ -46,4 +75,71 @@ function updateBackground(sunrise, sunset) {
   } else {
     document.body.style.backgroundImage = "url('night.jpg')";
   }
+}
+
+async function fetchWeeklyData(lat, lng) {
+  const data = [];
+  const labels = [
+    "Monday",
+    "Tuesday",
+    "Wednesday",
+    "Thursday",
+    "Friday",
+    "Saturday",
+    "Sunday",
+  ];
+  const sunriseTimes = ["6:30", "6:28", "6:27", "6:25", "6:24", "6:22", "6:21"];
+  const sunsetTimes = ["7:45", "7:43", "7:42", "7:40", "7:38", "7:36", "7:35"];
+
+  const ctx = document.getElementById("sun-chart").getContext("2d");
+  new Chart(ctx, {
+    type: "line",
+    data: {
+      labels: labels,
+      datasets: [
+        {
+          label: "Sunrise Time",
+          data: sunriseTimes.map((time) => {
+            const [hour, minute] = time.split(":").map(Number);
+            return hour + minute / 60;
+          }),
+          borderColor: "orange",
+          borderWidth: 2,
+          fill: false,
+        },
+        {
+          label: "Sunset Time",
+          data: sunsetTimes.map((time) => {
+            const [hour, minute] = time.split(":").map(Number);
+            return hour + minute / 60;
+          }),
+          borderColor: "purple",
+          borderWidth: 2,
+          fill: false,
+        },
+      ],
+    },
+  });
+}
+
+function showSuggestions(input) {
+  const firstLetter = input[0]?.toUpperCase();
+  const suggestionBox = document.getElementById("location-suggestions");
+  const suggestionList = document.getElementById("suggestion-list");
+
+  if (popularLocations[firstLetter]) {
+    suggestionBox.style.display = "block";
+    suggestionList.innerHTML = popularLocations[firstLetter]
+      .map((item) => `<li onclick="selectSuggestion('${item}')">${item}</li>`)
+      .join("");
+  } else {
+    suggestionBox.style.display = "none";
+    suggestionList.innerHTML = "";
+  }
+}
+
+function selectSuggestion(location) {
+  document.getElementById("location").value = location;
+  document.getElementById("location-suggestions").style.display = "none";
+  // reminder functionality to fetch sunrise/sunset times based on location here !!!!!
 }

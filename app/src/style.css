@@ -1,5 +1,5 @@
-:root {
-  font-family: arial, sans-serif;
+body {
+  font-family: Arial, sans-serif;
   margin: 0;
   padding: 0;
   background: transparent;
@@ -9,7 +9,7 @@
   align-items: center;
   justify-content: center;
   min-height: 100vh;
-  transition: 1s ease-in-out;
+  transition: background-image 1s ease-in-out;
 }
 header {
   text-align: center;
@@ -23,4 +23,101 @@ h1 {
   display: flex;
   justify-content: space-around;
   width: 80%;
+  max-width: 600px;
+  margin: 20px auto;
+  background: rgba(255, 255, 255, 0.8);
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+.time {
+  text-align: center;
+}
+.time h2 {
+  font-size: 1.5rem;
+  margin: 0;
+  color: #4a403a;
+}
+.time p {
+  font-size: 1rem;
+  color: #555;
+}
+footer {
+  margin-top: 30px;
+  font-size: 0.9rem;
+  color: #555;
+}
+#location-input {
+  margin: 20px 0;
+  animation: blur-in-out 3s infinite;
+}
+#location-input input {
+  padding: 10px;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  width: 300px;
+}
+#location-suggestions {
+  position: relative;
+  margin-top: 10px;
+  width: 300px;
+}
+
+#location-suggestions ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background: #fff;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+#location-suggestions ul li {
+  padding: 10px;
+  font-size: 1rem;
+  cursor: pointer;
+}
+#location-suggestions ul li:hover {
+  background: #f0f0f0;
+}
+#location-image {
+  margin-top: 20px;
+  max-width: 100%;
+  max-height: 400px;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+#extra-info {
+  margin-top: 20px;
+  text-align: center;
+  background: rgba(255, 255, 255, 0.8);
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  width: 80%;
+  max-width: 600px;
+}
+#chart {
+  margin: 50px 0;
+  width: 90%;
+  max-width: 800px;
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+canvas {
+  width: 100%;
+  height: 400px;
+}
+
+@keyframes blur-in-out {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
 }
