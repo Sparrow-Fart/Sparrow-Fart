@@ -6,42 +6,84 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Vite App</title>
   </head>
-  <body>
+  <body id="body">
     <main>
       <header>
-        <h1>Sparrow Fart</h1>
-        <p>Your daily sunrise and sunset times</p>
+        <h1 id="first-header">Sparrow Fart</h1>
+        <p id="first-p">Your daily sunrise and sunset times</p>
       </header>
       <div id="location-input">
         <input type="text" id="location" placeholder="Enter your location..." />
-        <div id="suggestions"></div>
+        <div id="suggestions" style="display: none">
+          <ul id="suggestion-list"></ul>
+        </div>
       </div>
+      <button id="search-button">Search</button>
 
       <div id="sun-times">
-        <div class="time">
-          <h2>Sunrise</h2>
-          <p id="sunrise-time">--:--</p>
+        <div>
+          <img
+            src="https://cdn.discordapp.com/attachments/1066473158774886431/1333384506534662195/Untitled9-1_20250127053344.png?ex=6798b297&is=67976117&hm=154ccf4399ca6c59aa968438ba7780459382402a1564e35a9b26dfd72803bb29&"
+            alt="Sunrise icon"
+            style="height: 39.5px; width: 60.5px; filter: invert(100%)"
+          />
+          Sunrise
         </div>
-        <div class="time">
-          <h2>Sunset</h2>
-          <p id="sunset-time">--:--</p>
+        <div id="sunrise-time">--:--</div>
+        <div>
+          <img
+            src="https://cdn.discordapp.com/attachments/1066473158774886431/1333384506299777065/Untitled9-1_20250127053350.png?ex=6798b297&is=67976117&hm=a34563904257fd374ffc6f341778726b4bbda57fddd753ce1456941dac185121&"
+            alt="Sunset icon"
+            style="height: 39.5px; width: 60.5px; filter: invert(100%)"
+          />
+          Sunset
         </div>
+        <div id="sunset-time">--:--</div>
       </div>
+
+      <!-- <div id="sun-times">
+        <div class="sun-time-container"></div>
+        <div class="time">
+          <h2>
+            <img
+              id="sunrise-icon"
+              src="https://cdn.discordapp.com/attachments/1066473158774886431/1333319187308875817/Untitled9-1_20250127011353.png?ex=679875c2&is=67972442&hm=f8881e6c8f23bdb72763798efa9e3b3cbdc7e9f8447fcfc1419c447cbad556df&"
+              alt="Sunrise icon"
+              style="width: 24px; height: 24px"
+            />
+            Sunrise
+          </h2>
+          <div><p id="sunrise-time">--:--</p></div>
+        </div>
+        <div class="time">
+          <h2>
+            <img
+              id="sunrise-icon"
+              src="https://cdn.discordapp.com/attachments/1066473158774886431/1333319187086573568/Untitled9-1_20250127011414.png?ex=679875c2&is=67972442&hm=4c28e7051c1e4ca61cbfb91125c0210c0296ac425b7c37932adce4a21954d638&"
+              alt="Sunset icon"
+              style="width: 24px; height: 24px"
+            />
+            Sunset
+          </h2>
+          <div><p id="sunset-time">--:--</p></div>
+        </div>
+      </div> -->
 
       <div id="extra-info">
         <h2>Additional Information</h2>
         <p id="Shortest-day">Shortest Day: Calculating...</p>
         <p id="Longest-day">Longest Day: Calculation...</p>
       </div>
-      <img id="Location-image" alt="Location" src="" style="display: none" />
+      <img id="location-image" alt="Location" src="" style="display: none" />
 
       <div id="chart">
         <h2>Sunrise and Sunset Times This Week</h2>
-        <canvas id="sun-chart"></canvas>
+        <canvas id="sun-chart" width="400" height="200"></canvas>
       </div>
 
       <footer>
         <p>Powered by fellows at Marcy for early birds and night owls</p>
+        <p>Develop by Issac Bien-Aime & Joshua Young</p>
       </footer>
     </main>
     <div id="app"></div>
