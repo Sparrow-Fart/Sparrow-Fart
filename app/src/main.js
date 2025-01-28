@@ -1,4 +1,6 @@
 import "./style.css";
+import Chart from "chart.js/auto";
+
 const popularLocations = {
   A: ["Atlanta", "Austin", "Anchorage", "Albany", "Albuquerque"],
   B: ["Brooklyn", "Boston", "Boulder", "Baltimore", "Baton Rouge", "Bronx"],
@@ -91,6 +93,8 @@ async function fetchSunTimes(lat, lng) {
   updateBackground(sunrise, sunset);
 }
 
+let myChart = null;
+
 async function fetchWeeklyData(lat, lng) {
   try {
     const response = await fetch(
@@ -115,8 +119,10 @@ async function fetchWeeklyData(lat, lng) {
       new Date(date).toLocaleDateString("en-US", { weekday: "short" })
     );
 
+    if (myChart) myChart.destroy();
+
     const ctx = document.getElementById("sun-chart").getContext("2d");
-    new Chart(ctx, {
+    myChart = new Chart(ctx, {
       type: "line",
       data: {
         labels,
