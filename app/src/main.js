@@ -240,7 +240,8 @@ function updateBackground(sunrise, sunset) {
   const updateSunsetTitle = document.getElementById("sunset-title");
   const updateSunriseTime = document.getElementById("sunrise-time");
   const updateSunsetTime = document.getElementById("sunset-time");
-
+  const updateLocationInput = document.getElementById("location");
+  console.log(currentHour, sunrise);
   if (currentHour < sunrise) {
     document.body.style.background =
       "linear-gradient(to bottom, #0e1b44 0%, #3d3e85 100%)";
@@ -251,6 +252,7 @@ function updateBackground(sunrise, sunset) {
     updateSunsetTitle.style.background = "#0e1b44";
     updateSunriseTime.style.background = "#0e1b44";
     updateSunsetTime.style.background = "#0e1b44";
+    updateLocationInput.style.background = "#0e1b44";
 
     // checking if the sunrise is an hour away - or + tthis is just for more variations
   } else if (currentHour >= sunrise - 1 && currentHour < sunrise + 1) {
@@ -275,6 +277,9 @@ function updateBackground(sunrise, sunset) {
     updateSunsetTitle.style.background = "#0185ad";
     updateSunriseTime.style.background = "#0185ad";
     updateSunsetTime.style.background = "#0185ad";
+    console.log("updating location input style");
+    updateLocationInput.style.background = "rgb(33, 153, 189);";
+
     // same as sunrise hour check
   } else if (currentHour >= sunset - 1 && currentHour < sunset + 1) {
     document.body.style.background =
