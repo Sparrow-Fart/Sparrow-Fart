@@ -1,4 +1,6 @@
 import "./style.css";
+import Chart from "chart.js/auto";
+
 const popularLocations = {
   A: ["Atlanta", "Austin", "Anchorage", "Albany", "Albuquerque"],
   B: ["Brooklyn", "Boston", "Boulder", "Baltimore", "Baton Rouge", "Bronx"],
@@ -100,19 +102,20 @@ async function fetchSunTimes(lat, lng) {
   console.log(sunrise, sunset);
 }
 
-function displayData(event) {
-  // event.preventDefault();
-  let main = document.getElementById("sun-times");
+// function displayData(event) {
+//   // event.preventDefault();
+//   let main = document.getElementById("sun-times");
 
-  if (main.style.display === "") {
-    main.style.display = "block";
-    console.log(main.style);
-  }
-}
+//   if (main.style.display === "") {
+//     main.style.display = "block";
+//     console.log(main.style);
+//   }
+// }
 
-document
-  .getElementById("location-input")
-  .addEventListener("submit", displayData);
+// document
+//   .getElementById("location-input")
+//   .addEventListener("submit", displayData);
+let myChart = null;
 
 async function fetchWeeklyData(lat, lng) {
   try {
@@ -138,8 +141,10 @@ async function fetchWeeklyData(lat, lng) {
       new Date(date).toLocaleDateString("en-US", { weekday: "short" })
     );
 
+    if (myChart) myChart.destroy();
+
     const ctx = document.getElementById("sun-chart").getContext("2d");
-    new Chart(ctx, {
+    myChart = new Chart(ctx, {
       type: "line",
       data: {
         labels,
@@ -247,7 +252,7 @@ function updateBackground(sunrise, sunset) {
       "linear-gradient(to bottom, #0e1b44 0%, #3d3e85 100%)";
     updateHeaderBkgrd.style.background =
       "linear-gradient(to bottom, #0e1b44 0%, #3d3e85 100%)";
-    updateSuntimes = "#0e1b44";
+    updateSuntimes.style.background = "#0e1b44";
     updateSunriseTitle.style.background = "#0e1b44";
     updateSunsetTitle.style.background = "#0e1b44";
     updateSunriseTime.style.background = "#0e1b44";
