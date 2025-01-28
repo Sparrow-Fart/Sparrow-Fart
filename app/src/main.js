@@ -236,14 +236,21 @@ function updateBackground(sunrise, sunset) {
   const updateText = document.getElementById("first-header");
   const updateHeaderBkgrd = document.getElementById("header");
   const updateSuntimes = document.getElementById("sun-times");
+  const updateSunriseTitle = document.getElementById("sunrise-title");
+  const updateSunsetTitle = document.getElementById("sunset-title");
+  const updateSunriseTime = document.getElementById("sunrise-time");
+  const updateSunsetTime = document.getElementById("sunset-time");
 
   if (currentHour < sunrise) {
     document.body.style.background =
       "linear-gradient(to bottom, #0e1b44 0%, #3d3e85 100%)";
     updateHeaderBkgrd.style.background =
       "linear-gradient(to bottom, #0e1b44 0%, #3d3e85 100%)";
-    updateSuntimes =
-      "linear-gradient(to bottom,rgba(14, 27, 68, 0.50) 0%,rgba(61, 62, 133, 0.50) 100%)";
+    updateSuntimes = "#0e1b44";
+    updateSunriseTitle.style.background = "#0e1b44";
+    updateSunsetTitle.style.background = "#0e1b44";
+    updateSunriseTime.style.background = "#0e1b44";
+    updateSunsetTime.style.background = "#0e1b44";
 
     // checking if the sunrise is an hour away - or + tthis is just for more variations
   } else if (currentHour >= sunrise - 1 && currentHour < sunrise + 1) {
@@ -251,8 +258,11 @@ function updateBackground(sunrise, sunset) {
       "linear-gradient(to bottom, #9bb1ca 0%, #f7a821 100%)";
     updateHeaderBkgrd.style.background =
       "linear-gradient(to bottom, #9bb1ca 80%, #f7a92100 100%)";
-    updateSuntimes.style.background =
-      "linear-gradient(to bottom, #9bb1ca 0%, #f7a92100 100%)";
+    updateSuntimes.style.background = "#9bb1ca";
+    updateSunriseTitle.style.background = "#9bb1ca";
+    updateSunsetTitle.style.background = "#9bb1ca";
+    updateSunriseTime.style.background = "#9bb1ca";
+    updateSunsetTime.style.background = "#9bb1ca";
 
     //this one is for general daytime
   } else if (currentHour >= sunrise && currentHour < sunset) {
@@ -260,19 +270,32 @@ function updateBackground(sunrise, sunset) {
       "linear-gradient(to bottom, #0185ad 0%, #3a7fc6 100%)";
     updateHeaderBkgrd.style.background =
       "linear-gradient(to bottom, #0185ad 80%,rgba(58, 128, 198, 0) 100%)";
-    updateSuntimes.style.background =
-      "linear-gradient(to bottom, #0185ad 80%,rgba(58, 128, 198, 0.50) 100%)";
+    updateSuntimes.style.background = "#0185ad";
+    updateSunriseTitle.style.background = "#0185ad";
+    updateSunsetTitle.style.background = "#0185ad";
+    updateSunriseTime.style.background = "#0185ad";
+    updateSunsetTime.style.background = "#0185ad";
     // same as sunrise hour check
   } else if (currentHour >= sunset - 1 && currentHour < sunset + 1) {
     document.body.style.background =
       "linear-gradient(to bottom, #ad4850 0%, #f6c859 100%)";
     updateHeaderBkgrd.style.background =
       "linear-gradient(to bottom, #ad4850 80%,rgba(246, 199, 89, 0) 100%)";
+    updateSuntimes.style.background = "#ad4850";
+    updateSunriseTitle.style.background = "#ad4850";
+    updateSunsetTitle.style.background = "#ad4850";
+    updateSunriseTime.style.background = "#ad4850";
+    updateSunsetTime.style.background = "#ad4850";
   } else {
     document.body.style.background =
       "linear-gradient(to bottom, #350f68 0%, #193eae 100%)";
     updateHeaderBkgrd.style.background =
       "linear-gradient(to bottom, #350f68 80%, #3d3e8500 100%)";
+    updateSuntimes.style.background = "#350f68";
+    updateSunriseTitle.style.background = "#350f68";
+    updateSunsetTitle.style.background = "#350f68";
+    updateSunriseTime.style.background = "#350f68";
+    updateSunsetTime.style.background = "#350f68";
   }
 }
 
