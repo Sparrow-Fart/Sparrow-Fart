@@ -75,21 +75,44 @@ async function fetchSunTimes(lat, lng) {
     `https://api.sunrise-sunset.org/json?lat=${lat}&lng=${lng}&formatted=0`
   );
   const data = await response.json();
+  //console.log(newdate(data.results.sunrise, data.results.sunset));
+  const sunrise = new Date(data.results.sunrise);
+  const sunset = new Date(data.results.sunset);
 
-  const sunrise = new Date(data.results.sunrise).toLocaleTimeString([], {
-    hour: "2-digit",
-    minute: "2-digit",
-  });
-  const sunset = new Date(data.results.sunset).toLocaleTimeString([], {
-    hour: "2-digit",
-    minute: "2-digit",
-  });
+  document.getElementById("sunrise-time").textContent = sunrise.toLocaleString(
+    "en-US",
+    {
+      hour: "numeric",
+      minute: "numeric",
+      hour12: true,
+    }
+  );
+  document.getElementById("sunset-time").textContent = sunset.toLocaleString(
+    "en-US",
+    {
+      hour: "numeric",
+      minute: "numeric",
+      hour12: true,
+    }
+  );
 
-  document.getElementById("sunrise-time").textContent = sunrise + " ET";
-  document.getElementById("sunset-time").textContent = sunset + " ET";
-
-  updateBackground(sunrise, sunset);
+  updateBackground(sunrise.getHours(), sunset.getHours());
+  console.log(sunrise, sunset);
 }
+
+function displayData(event) {
+  // event.preventDefault();
+  let main = document.getElementById("sun-times");
+
+  if (main.style.display === "") {
+    main.style.display = "block";
+    console.log(main.style);
+  }
+}
+
+document
+  .getElementById("location-input")
+  .addEventListener("submit", displayData);
 
 async function fetchWeeklyData(lat, lng) {
   try {
@@ -134,7 +157,7 @@ async function fetchWeeklyData(lat, lng) {
         ],
       },
       options: { responsive: true },
-    });
+    }).innerHTML;
   } catch (err) {
     console.error(err);
   }
@@ -203,109 +226,53 @@ async function fetchLocationImage(query) {
 
 function updateBackground(sunrise, sunset) {
   const currentTime = new Date();
-
   // hours but in 24hr format
   const currentHour = currentTime.getHours();
 
   // sttring splitting following previous code challenge so hrs and mins separate
-  const [sunriseHour] = sunrise.split(":").map(Number);
-  const [sunsetHour] = sunset.split(":").map(Number);
+  // const [sunriseHour] = sunrise.split(":").map(Number);
+  // const [sunsetHour] = sunset.split(":").map(Number);
 
   const updateText = document.getElementById("first-header");
+  const updateHeaderBkgrd = document.getElementById("header");
 
-  if (currentHour < sunriseHour) {
+  if (currentHour < sunrise) {
     document.body.style.background =
+      "linear-gradient(to bottom, #0e1b44 0%, #3d3e85 100%)";
+    updateHeaderBkgrd.style.background =
       "linear-gradient(to bottom, #0e1b44 0%, #3d3e85 100%)";
 
     // checking if the sunrise is an hour away - or + tthis is just for more variations
-  } else if (currentHour >= sunriseHour - 1 && currentHour < sunriseHour + 1) {
+  } else if (currentHour >= sunrise - 1 && currentHour < sunrise + 1) {
     document.body.style.background =
       "linear-gradient(to bottom, #9bb1ca 0%, #f7a821 100%)";
 
     //this one is for general daytime
-  } else if (currentHour >= sunriseHour && currentHour < sunsetHour) {
+  } else if (currentHour >= sunrise && currentHour < sunset) {
     document.body.style.background =
       "linear-gradient(to bottom, #0185ad 0%, #3a7fc6 100%)";
     // same as sunrise hour check
-  } else if (currentHour >= sunsetHour - 1 && currentHour < sunsetHour + 1) {
+  } else if (currentHour >= sunset - 1 && currentHour < sunset + 1) {
     document.body.style.background =
       "linear-gradient(to bottom, #ad4850 0%, #f6c859 100%)";
   } else {
     document.body.style.background =
-      "linear-gradient(to bottom,rgb(53, 15, 104) 0%,rgb(25, 62, 174) 100%)";
+      "linear-gradient(to bottom, #350f68 0%,rgb(25, 62, 174) 100%)";
+    updateHeaderBkgrd.style.background =
+      "linear-gradient(to bottom, #350f68 80%,#3d3e8500 100%)";
   }
 }
-
-// function updateBackground(sunrise, sunset) {
-//   const currentTime = new Date();
-
-//
-//   const currentHour = currentTime.getHours();
-
-//   // sttring splitting following previous code challenge so hrs and mins separate
-//   const [sunriseHour] = sunrise.split(":").map(Number);
-//   const [sunsetHour] = sunset.split(":").map(Number);
-
-//   const updateText = document.getElementById("first-header");
-
-//   if (currentHour < sunsetHour - 1) {
-//     document.body.style.background =
-//       "linear-gradient(to bottom, #ad4850 0%, #f6c859 100%)";
-//   } else if (currentHour < sunriseHour) {
-//     updateText.style.color = "Black";
-//     document.body.style.background =
-//       "linear-gradient(to bottom, #0e1b44 0%, #3d3e85 100%)";
-//   } else if (currentHour < sunriseHour - 1 || currentHour < sunriseHour + 1) {
-//     document.body.style.background =
-//       "linear-gradient(to bottom, #9bb1ca 0%, #f7a821 100%)";
-//   } else if (currentHour >= sunriseHour && currentHour < sunsetHour) {
-//     updateText.style.color = "Black";
-//     document.body.style.background =
-//       "linear-gradient(to bottom, #0185ad 0%, #3a7fc6 100%)";
-//   } else {
-//     updateText.style.color = "Black";
-//     document.body.style.background =
-//       "linear-gradient(to bottom, #ad4850 0%, #f6c859 100%)";
-//   }
-// }
-
-// function updateBackground(sunrise, sunset) {
-//   const currentTime = new Date();
-//   const sunriseTime = new Date(`1970-01-01T${sunrise}Z`);
-//   const sunsetTime = new Date(`1970-01-01T${sunset}Z`);
-//   const updateText = document.getElementById("first-header");
-//   const updateGradient = document.getElementById("body");
-
-//   if (currentTime < sunriseTime) {
-//     updateText.style.color = "Black";
-//     document.body.style.background =
-//       "linear-gradient(to bottom, #0e1b44 0%, #3d3e85 100%)";
-//   } else if (currentTime < sunsetTime) {
-//     updateText.style.color = "Black";
-//     document.body.style.background =
-//       "linear-gradient(to bottom, #0185ad 0%, #3a7fc6 100%)";
-//   } else if (currentTime === sunriseTime) {
-//     document.body.style.background =
-//       "linear-gradient(to bottom, #9bb1ca 0%, #f7a821 100%)";
-//   } else if (currentTime === sunsetTime) {
-//     document.body.style.background =
-//       "linear-gradient(to bottom, #ad4850 0%, #f6c859 100%)";
-//   } else {
-//     updateText.style.color = "Black";
-//     document.body.style.background = "black";
-//   }
-// }
 
 window.onscroll = function () {
   scrollFunction();
 };
 
 function scrollFunction() {
-  if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+  if (document.body.scrollTop > 50 || document.documentElement.scrollTop > 50) {
     document.getElementById("first-header").style.fontSize = "30px";
     document.getElementById("first-p").style.fontSize = "15px";
   } else {
-    document.getElementsByName("first-header").style.fontSize = "2.5rem";
-    document.getElementsByName("first-header").style.fontSize = "1.2rem";
+    document.getElementById("first-header").style.fontSize = "90px";
+    document.getElementById("first-header").style.fontSize = "45px";
   }
 }
