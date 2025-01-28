@@ -235,31 +235,44 @@ function updateBackground(sunrise, sunset) {
 
   const updateText = document.getElementById("first-header");
   const updateHeaderBkgrd = document.getElementById("header");
+  const updateSuntimes = document.getElementById("sun-times");
 
   if (currentHour < sunrise) {
     document.body.style.background =
       "linear-gradient(to bottom, #0e1b44 0%, #3d3e85 100%)";
     updateHeaderBkgrd.style.background =
       "linear-gradient(to bottom, #0e1b44 0%, #3d3e85 100%)";
+    updateSuntimes =
+      "linear-gradient(to bottom,rgba(14, 27, 68, 0.50) 0%,rgba(61, 62, 133, 0.50) 100%)";
 
     // checking if the sunrise is an hour away - or + tthis is just for more variations
   } else if (currentHour >= sunrise - 1 && currentHour < sunrise + 1) {
     document.body.style.background =
       "linear-gradient(to bottom, #9bb1ca 0%, #f7a821 100%)";
+    updateHeaderBkgrd.style.background =
+      "linear-gradient(to bottom, #9bb1ca 80%, #f7a92100 100%)";
+    updateSuntimes.style.background =
+      "linear-gradient(to bottom, #9bb1ca 0%, #f7a92100 100%)";
 
     //this one is for general daytime
   } else if (currentHour >= sunrise && currentHour < sunset) {
     document.body.style.background =
       "linear-gradient(to bottom, #0185ad 0%, #3a7fc6 100%)";
+    updateHeaderBkgrd.style.background =
+      "linear-gradient(to bottom, #0185ad 80%,rgba(58, 128, 198, 0) 100%)";
+    updateSuntimes.style.background =
+      "linear-gradient(to bottom, #0185ad 80%,rgba(58, 128, 198, 0.50) 100%)";
     // same as sunrise hour check
   } else if (currentHour >= sunset - 1 && currentHour < sunset + 1) {
     document.body.style.background =
       "linear-gradient(to bottom, #ad4850 0%, #f6c859 100%)";
+    updateHeaderBkgrd.style.background =
+      "linear-gradient(to bottom, #ad4850 80%,rgba(246, 199, 89, 0) 100%)";
   } else {
     document.body.style.background =
-      "linear-gradient(to bottom, #350f68 0%,rgb(25, 62, 174) 100%)";
+      "linear-gradient(to bottom, #350f68 0%, #193eae 100%)";
     updateHeaderBkgrd.style.background =
-      "linear-gradient(to bottom, #350f68 80%,#3d3e8500 100%)";
+      "linear-gradient(to bottom, #350f68 80%, #3d3e8500 100%)";
   }
 }
 
