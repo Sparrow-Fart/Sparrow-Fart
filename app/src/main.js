@@ -2,20 +2,35 @@ import "./style.css";
 import Chart from "chart.js/auto";
 
 const popularLocations = {
-  A: ["Atlanta", "Austin", "Anchorage", "Albany", "Albuquerque"],
-  B: ["Brooklyn", "Boston", "Boulder", "Baltimore", "Baton Rouge", "Bronx"],
-  C: ["Chicago", "Cleveland", "Columbus", "Charlotte", "Cincinnati"],
+  A: ["Atlanta", "Austin", "Anchorage", "Albany", "Albuquerque", "Algeria"],
+  B: [
+    "Brooklyn",
+    "Boston",
+    "Boulder",
+    "Baltimore",
+    "Baton Rouge",
+    "Bronx",
+    "Botswana",
+  ],
+  C: [
+    "Chicago",
+    "Cleveland",
+    "Columbus",
+    "Charlotte",
+    "Cincinnati",
+    "Cameroon",
+  ],
   D: ["Dallas", "Denver", "Detroit", "Durham", "Des Moines"],
-  E: ["El Paso", "Eugene", "Evansville", "Elizabeth", "Ecuador"],
-  F: ["Fresno", "Fort Worth", "Fort Lauderdale", "Fairbanks"],
-  G: ["Grand Rapids", "Greensboro", "Glendale", "Gainesville"],
-  H: ["Houston", "Honolulu", "Huntsville", "Hartford"],
+  E: ["El Paso", "Eugene", "Evansville", "Elizabeth", "Ecuador", "Egypt"],
+  F: ["Fresno", "Fort Worth", "Fort Lauderdale", "Fairbanks", "Fiji"],
+  G: ["Grand Rapids", "Greensboro", "Glendale", "Gainesville", "Ghana"],
+  H: ["Houston", "Honolulu", "Huntsville", "Hartford", "Honduras"],
   I: ["Indianapolis", "Irvine", "Idaho Falls", "Inglewood"],
-  J: ["Jacksonville", "Japan", "Jersey City", "Juneau", "Jackson"],
-  K: ["Kansas City", "Knoxville", "Kalamazoo", "Ketchikan"],
+  J: ["Jacksonville", "Japan", "Jersey City", "Juneau", "Jackson", "Jamaica"],
+  K: ["Kansas City", "Knoxville", "Kalamazoo", "Ketchikan", "Kenya"],
   L: ["Los Angeles", "Louisville", "Las Vegas", "Little Rock", "London"],
   M: ["Miami", "Milwaukee", "Memphis", "Minneapolis", "Mexico"],
-  N: ["New York", "Nashville", "New Orleans", "Norfolk"],
+  N: ["New York", "Nashville", "New Orleans", "Norfolk", "Nigeria"],
   O: ["Orlando", "Omaha", "Oakland", "Oklahoma City"],
   P: ["Philadelphia", "Phoenix", "Pittsburgh", "Portland", "Paris"],
   Q: ["Quincy", "Queens"],
@@ -108,16 +123,56 @@ async function fetchWeeklyData(lat, lng) {
     const data = await response.json();
 
     const dates = data.daily.time;
-    const sunriseHours = data.daily.sunrise.map((time) =>
-      new Date(time).getHours()
+    const sunriseTimes = data.daily.sunrise;
+    const sunsetTimes = data.daily.sunset;
+
+    // Parse times and calculate the duration of daylight for each day
+    const daylightDurations = dates.map((date, index) => {
+      const sunrise = new Date(sunriseTimes[index]);
+      const sunset = new Date(sunsetTimes[index]);
+
+      // Calculate daylight duration in hours
+      const daylightDuration = (sunset - sunrise) / 1000 / 60 / 60; // in hours
+      return {
+        date: new Date(date),
+        daylightDuration,
+      };
+    });
+
+    // Find the shortest and longest day
+    const shortestDay = daylightDurations.reduce((prev, current) =>
+      prev.daylightDuration < current.daylightDuration ? prev : current
     );
-    const sunsetHours = data.daily.sunset.map((time) =>
-      new Date(time).getHours()
+    const longestDay = daylightDurations.reduce((prev, current) =>
+      prev.daylightDuration > current.daylightDuration ? prev : current
     );
 
+    // Format and display the shortest and longest days
+    const shortestDayName = shortestDay.date.toLocaleDateString("en-US", {
+      weekday: "long",
+    });
+    const longestDayName = longestDay.date.toLocaleDateString("en-US", {
+      weekday: "long",
+    });
+
+    // Update the UI with the shortest and longest day information
+    document.getElementById(
+      "Shortest-day"
+    ).textContent = `Shortest Day: ${shortestDayName} - ${shortestDay.daylightDuration.toFixed(
+      2
+    )} hours`;
+    document.getElementById(
+      "Longest-day"
+    ).textContent = `Longest Day: ${longestDayName} - ${longestDay.daylightDuration.toFixed(
+      2
+    )} hours`;
+
+    // Update the chart (optional) for sunrise/sunset times this week
     const labels = dates.map((date) =>
       new Date(date).toLocaleDateString("en-US", { weekday: "short" })
     );
+    const sunriseHours = sunriseTimes.map((time) => new Date(time).getHours());
+    const sunsetHours = sunsetTimes.map((time) => new Date(time).getHours());
 
     if (myChart) myChart.destroy();
 
@@ -145,6 +200,23 @@ async function fetchWeeklyData(lat, lng) {
     console.error(err);
   }
 }
+
+// async function fetchWeeklyData(lat, lng) {
+//   try {
+//     const response = await fetch(
+//       `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lng}&daily=sunrise,sunset&timezone=auto`
+//     );
+
+//     if (!response.ok) {
+//       throw new Error("Error fetching weekly data");
+//     }
+
+//     const data = await response.json();
+
+//     const dates = data.daily.time;
+//     const sunriseHours = data.daily.sunrise.map((time) =>
+//       new Date(time).getHours()
+//
 
 function selectSuggestion(location) {
   document.getElementById("location").value = location;
