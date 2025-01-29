@@ -19,6 +19,7 @@ const popularLocations = {
     "Charlotte",
     "Cincinnati",
     "Cameroon",
+    "China",
   ],
   D: ["Dallas", "Denver", "Detroit", "Durham", "Des Moines"],
   E: ["El Paso", "Eugene", "Evansville", "Elizabeth", "Ecuador", "Egypt"],
