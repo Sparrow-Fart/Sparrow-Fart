@@ -324,7 +324,7 @@ function updateBackground(sunrise, sunset) {
     document.body.style.background =
       "linear-gradient(to bottom, #0e1b44 0%, #3d3e85 100%)";
     updateHeaderBkgrd.style.background =
-      "linear-gradient(to bottom, #0e1b44 0%, #3d3e85 100%)";
+      "linear-gradient(to bottom, #0e1b44 0%,#3d3e8500 100%)";
     updateSuntimes.style.background = "#0e1b44";
     updateSunriseTitle.style.background = "#0e1b44";
     updateSunsetTitle.style.background = "#0e1b44";
