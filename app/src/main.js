@@ -300,6 +300,33 @@ async function fetchLocationImage(query) {
     img.style.display = "block";
   }
 }
+//Issac wuz here
+
+window.onscroll = function () {
+  scrollFunction();
+};
+
+function scrollFunction() {
+  if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+    document.getElementById("header").style.fontSize = "30px";
+  } else {
+    document.getElementById("header").style.fontSize = "70px";
+  }
+}
+
+function displayData(event) {
+  event.preventDefault();
+  let main = document.getElementById("main-content");
+
+  if (main.style.display === "") {
+    main.style.display = "block";
+    console.log(main.style);
+  }
+}
+
+document
+  .getElementById("location-form")
+  .addEventListener("submit", displayData);
 
 function updateBackground(sunrise, sunset) {
   const currentTime = new Date();

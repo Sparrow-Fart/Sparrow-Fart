@@ -1,0 +1,75 @@
+header {
+  padding: 50px 10px;
+  color: white;
+  width: 100%;
+  text-align: center;
+  font-family: "Varela Round";
+  font-size: 70px;
+  font-weight: 1000;
+  position: fixed;
+  top: 0;
+  transition: 0.4s;
+}
+
+html,
+body {
+  margin: 0;
+  height: 100%;
+  width: 100%;
+  background: linear-gradient(rgb(147, 188, 208) 12%, rgb(170, 186, 190) 80%);
+}
+
+#main-content {
+  display: none;
+  max-width: 600px;
+  margin: 0 auto;`
+  border: solid 10px green;
+  padding: 10px;
+  margin-top: 2000px;
+}
+
+#location-input {
+  margin: auto;
+  width: 50%;
+  height: 30px;
+  font-size: 20px;
+  border-radius: 5px;
+  border-style: solid;
+}
+
+.topButton {
+  border: none;
+  border-radius: 7px;
+  background: none;
+  color: rgb(108, 15, 15);
+  font-family: "Varela Round";
+  font-weight: 600;
+  font-size: 30px;
+}
+
+#sun-times {
+  display: flex;
+  justify-content: space-around;
+  width: 80%;
+}
+
+.section {
+  border: hidden;
+  border-radius: 14px;
+  padding: 10px;
+  background: #154d695d;
+  margin: 5px;
+}
+
+#calendar {
+  padding: 10px;
+  margin: 5px;
+  background: #154d695d;
+}
+
+.mainFooter {
+  position: -webkit-sticky;
+  position: sticky;
+  bottom: 0;
+  border-color: red;
+}
